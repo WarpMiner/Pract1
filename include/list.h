@@ -1,59 +1,40 @@
-#pragma once
+#ifndef list_h
+#define list_h
 
 #include "includes.h"
 
-template<typename T>
+template <typename T>
 struct Node {
     T data;
-    Node* next;
-
-    Node(T value);
+    Node* next; //Указатель на след. элемент
+    
+    Node(T value); //Конструктор узла
 };
 
-template<typename T>
+template <typename T>
 struct SinglyLinkedList {
     Node<T>* head;
-    int size = 0;
+    size_t elementCount = 0;
 
-    SinglyLinkedList();
-    ~SinglyLinkedList();
+    SinglyLinkedList(); //Конструктор
+    ~SinglyLinkedList(); //Деконструктор
 
-    void print();
-    void push_front(T value);
-    void push_back(T value);
-    void pop_front();
-    void pop_back();
-    void remove(T value);
+    bool isEmpty() const;
+    void print(); // ф-ия вывода списка
+    void pushFront(T value); //Добавление в начало списка
+    void pushBack(T value); //Добавление в конец списка
+    void popFront(); //Удаление в начале списка
+    void popBack(); //Удаление в конце списка
+    void removeAt(T value); //Удаление по индексу
+    bool find(T value); //Поиск значений в списке
+    void clearSList();
+    T getElementAt(int index) const;
+    int getIndex(T value);
     void replace(int index, T newValue);
-    int getindex(T value);
-    T getvalue(int index);
-};
-
-template <typename T>
-struct Node2 {
-    T data;
-    Node2* next;
-    Node2* prev;
-
-    Node2(T value);
-};
-
-template <typename T>
-struct DoublyLinkedList {
-    Node2<T>* head;
-    Node2<T>* tail;
-    int size = 0;
-
-    DoublyLinkedList();
-    ~DoublyLinkedList();
-
-    void print();
-    void push_front(T value);
-    void push_back(T value);
-    void pop_front();
-    void pop_back();
-    void remove(T value);
-    bool find(T value);
+    Node<T>* getHead() const;
+    size_t size();
 };
 
 #include "../src/list.cpp"
+
+#endif // LIST_H
